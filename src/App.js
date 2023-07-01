@@ -15,7 +15,7 @@ function App() {
     }, 1000);
 
     return () => {
-      clearInterval(timerInterval);
+      clearInterval(interval);
     };
   };
 
@@ -53,11 +53,19 @@ function App() {
     });
   };
 
+  const formatTime = (time) => {
+    const date = new Date(time * 1000);
+    const hours = date.getHours().toString().padStart(2, "0");
+    const minutes = date.getMinutes().toString().padStart(2, "0");
+    const seconds = date.getSeconds().toString().padStart(2, "0");
+    return `${hours}:${minutes}:${seconds}`;
+  }
+
   return (
     <div className="App">
       <h1>Timer</h1>
       <div>
-        <p>Timer: {timer}</p>
+        <p>Timer: {formatTime(timer)}</p>
         <button onClick={handleStart}>Start</button>
         <button onClick={handleStop}>Stop</button>
         <button onClick={handleReset}>Reset</button>
