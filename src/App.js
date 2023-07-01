@@ -11,8 +11,8 @@ function App() {
   const handleStart = () => {
     setTimer(0);
     const interval = setInterval(() => {
-      setTimer(timer + 1);
-    }, 1000);
+      setTimer(timer + 10);
+    }, 10);
 
     return () => {
       clearInterval(interval);
@@ -54,11 +54,10 @@ function App() {
   };
 
   const formatTime = (time) => {
-    const date = new Date(time * 1000);
-    const hours = date.getHours().toString().padStart(2, "0");
-    const minutes = date.getMinutes().toString().padStart(2, "0");
-    const seconds = date.getSeconds().toString().padStart(2, "0");
-    return `${hours}:${minutes}:${seconds}`;
+    const minutes = Math.floor((time / 1000 / 60) % 60).toString().padStart(2, "0");
+    const seconds = Math.floor((time / 1000) % 60).toString().padStart(2, "0");
+    const milliseconds = Math.floor((time % 1000) / 10).toString().padStart(2, "0");
+    return `${minutes}:${seconds}:${milliseconds}`;
   }
 
   return (
